@@ -10,7 +10,6 @@ public class MazeCell : MonoBehaviour {
 	public MazeRoom room;
 
 	public void Initialize (MazeRoom room) {
-		Debug.Log (room.settingsIndex);
 		room.Add(this);
 		transform.GetChild(0).GetComponent<Renderer>().material = room.settings.floorMaterial;
 	}
@@ -24,6 +23,14 @@ public class MazeCell : MonoBehaviour {
 			return initializedEdgeCount == MazeDirections.Count;
 		}
 	}
+
+	/*public void Show () {
+		gameObject.SetActive(true);
+	}
+
+	public void Hide () {
+		gameObject.SetActive(false);
+	}*/
 
 	public void SetEdge (MazeDirection direction, MazeCellEdge edge) {
 		edges[(int)direction] = edge;

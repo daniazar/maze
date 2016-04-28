@@ -5,5 +5,7 @@ using System.Collections;
 public class MazeRoomSettings {
 
 	public Material floorMaterial, wallMaterial;
+
+
 }
 
