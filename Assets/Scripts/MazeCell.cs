@@ -4,10 +4,17 @@ public class MazeCell : MonoBehaviour {
 	public IntVector2 coordinates;
 
 	private MazeCellEdge[] edges = new MazeCellEdge[MazeDirections.Count];
+	private bool dug = false;
+	private bool shouldHaveChest;
+	public float chestThreahold = 0.1f;
+	private bool shouldHaveTreasure;
+	public Material digMaterial;
 
 	private int initializedEdgeCount;
 
 	public MazeRoom room;
+	public GameObject capsule;
+
 
 	public void Initialize (MazeRoom room) {
 		room.Add(this);
@@ -49,6 +56,20 @@ public class MazeCell : MonoBehaviour {
 				}
 			}
 			throw new System.InvalidOperationException("MazeCell has no uninitialized directions left.");
+		}
+	}
+
+	public void findTreasure(){
+		if (!dug) {
+
+
+			if (Random.Range (0, 1f) < chestThreahold) {
+				GameObject cap = Instantiate (capsule, transform.position + new Vector3 (0f, 0.2f, 0f), transform.rotation) as GameObject;
+				cap.transform.parent = transform;
+			}
+			dug = true;
+			this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material = digMaterial;
+
 		}
 	}
 }
